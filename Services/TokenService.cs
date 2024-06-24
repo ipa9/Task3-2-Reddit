@@ -23,7 +23,7 @@ public class TokenService
         _configuration = configuration;
     }
 
-    public string CreateToken(ApplicationUser user)
+    public string CreateToken(User user)
     {
         var expiration = DateTime.UtcNow.AddMinutes(AccessTokenExpirationMinutes);
         var token = CreateJwtToken(
@@ -58,7 +58,7 @@ public class TokenService
             signingCredentials: credentials
         );
 
-    private List<Claim> CreateClaims(ApplicationUser user)
+    private List<Claim> CreateClaims(User user)
     {
         try
         {
@@ -66,7 +66,7 @@ public class TokenService
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Email, user.Email),
             };

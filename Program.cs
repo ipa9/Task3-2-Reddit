@@ -57,7 +57,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
     opt.UseSqlite("Data Source = MyDatabase.db"));
 builder.Services.AddScoped<TokenService>();
-builder.Services.AddIdentityCore<ApplicationUser>(options =>
+builder.Services.AddIdentityCore<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
